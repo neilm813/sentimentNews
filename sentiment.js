@@ -1,14 +1,9 @@
 const unirest = require('unirest');
 require('dotenv').load();
 
-
-
 //Make call to news source api, parse json, set body text to variable text then call getSentiment
 
-
-
 var text = process.env.TEXT;
-
 
 var getSentiment = () => {
 
@@ -20,7 +15,6 @@ var getSentiment = () => {
         .end((result) => {
             console.log(result.body);
         });
-
 }
 
 module.exports = {
