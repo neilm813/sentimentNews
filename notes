@@ -1,1 +1,6 @@
 git push origin neil_contribution
+
+// pulling from original owner
+git checkout neil_contribution (or master?? haven't tried master)
+
+git pull https://github.com/taylorthomas89/sentimentNews master
