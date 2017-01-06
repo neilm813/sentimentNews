@@ -1,4 +1,7 @@
+git commit -am "message."
 git push origin neil_contribution
+Compare & pull request
+Create pull request
 
 // pulling from original owner
 git checkout neil_contribution (or master?? haven't tried master)
