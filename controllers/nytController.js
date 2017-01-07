@@ -1,6 +1,6 @@
 var axios = require('axios');
 
-function getArchive(req, res) {
+function index(req, res) {
   var key = process.env.NYT_KEY
 
   axios.get(`https://api.nytimes.com/svc/archive/v1/2016/12.json?api-key=${key}`)
@@ -11,9 +11,10 @@ function getArchive(req, res) {
     .catch(function (error) {
       console.log('error');
       console.log(error);
+      res.json(error);
     })
 }
 
 module.exports = {
-  getArchive: getArchive
+  index: index
 }

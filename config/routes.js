@@ -3,6 +3,6 @@ var router = express.Router();
 
 var nytController = require('../controllers/nytController');
 
-router.get('/nyt', nytController.getArchive);
+router.get('/nytArticles', nytController.index);
 
 module.exports = router;
