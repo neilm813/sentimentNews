@@ -1,11 +1,10 @@
 const unirest = require('unirest');
-require('dotenv').load();
 
 //Make call to news source api, parse json, set body text to variable text then call getSentiment
 
-var text = process.env.TEXT;
 
 var getSentiment = () => {
+    var text = process.env.TEXT;
 
     unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
         .header("X-Mashape-Key", "XWwI1lRtyEmsh1g9SDGRVs5BlBChp1LZoHCjsnjuhLqJTLgvws")
