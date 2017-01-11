@@ -1,1 +1,1 @@
-var app = angular.module('sentimentNews', []);
+var app = angular.module('sentimentNews', []);tpt
