@@ -9,10 +9,7 @@ angular.module('sentimentNews').controller('nytController', function ($scope, $h
       .then(function (response) {
         nytService.setArticles(response.data);
         $scope.articles = nytService.getArticles();
-        console.log($scope.articles);
       })
   }
-
-  getArticles();
 
 });
