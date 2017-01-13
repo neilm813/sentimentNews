@@ -3,7 +3,7 @@ const path = require('path');
 var bodyParser = require('body-parser');
 var routes = require('./config/routes');
 
-const sentiment = require('./sentiment.js');
+const sentiment = require('./controllers/sentiment.js');
 //const routers = require('./config/routes');
 
 var PORT = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// sentiment.getSentiment();
+// sentiment.getSentiment('I love you. I hate you.');
 
 app.listen(PORT, function() {
   console.log(`listening on port ${PORT}`);

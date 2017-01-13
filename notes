@@ -1,6 +1,9 @@
 NYT response (incomplete list)
+`https://api.nytimes.com/svc/archive/v1/2017/1.json?api-key=${key}`
 
-$scope.articles[]
+var articles = response.data.response.docs;
+
+articles[]
 .headline
   .main
   .print_headline // longer headline?
