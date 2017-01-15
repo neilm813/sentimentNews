@@ -2,31 +2,20 @@ require('dotenv').load();
 var axios = require('axios');
 var sentiment = require('../controllers/sentiment');
 
-var sentObj =
-	{
-		"documents": [
-			{
-				"language": "en",
-				"id": "1",
-				"text": ""
-			}
-		]
-	};
-
 function getArticles(year, month) {
+  sentiment.setSentimentMonth(month);
+
   (function callNYT(req, res) {
     var key = process.env.NYT_KEY;
-    console.log(`nyt key: ${key}`);
 
     axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${key}`)
       .then(function (response) {
+        var headlines = returnConcatedHeadlines(response.data.response.docs);
+        
+        console.log(`${response.data.response.docs.length} articles' headlines concatenated into ${headlines.length} blocks of text`);
 
-        sentObj.documents[0].text = returnSentimentText(response.data.response.docs);
-
-        sentiment.msSentiment(sentObj);
-
-        // Call to old sentiment API
-        // sentiment.getSentiment(returnSentimentText(response.data.response.docs));
+        sentiment.returnSentimentPostObj(headlines);
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -36,33 +25,30 @@ function getArticles(year, month) {
 }
 // getArticles('2017', '1');
 
-function returnSentimentText(articles) {
-  var sentimentText = '';
+/* Concat headlines to reduce # of documents sent in sentiment POST request because of their limit on us & their individual document size limit */
+function returnConcatedHeadlines(articles) {
+  var concated = '';
+  var arr = [];
 
   for (var i = 0; i < articles.length; i++) {
-    sentimentText += (articles[i].headline.main + '. ');
+    // size limit
+    if ((concated.length + articles[i].headline.main.length + 2) < 5095) {
+      concated += (' ' + articles[i].headline.main + '.');
+    }
+    else {
+      arr.push(concated);
+      concated = '';
+    }
   }
-  return sentimentText;
-}
 
+  if (arr.length === 0) {
+    return concated;
+  }
+  else {
+    return arr;
+  }
+}
 
 module.exports = {
-  getArticles: getArticles
+  getArticles
 }
-
-
-/*function index(req, res) {
-  var key = process.env.NYT_KEY;
-  console.log(key);
-
-  axios.get(`https://api.nytimes.com/svc/archive/v1/2017/1.json?api-key=${key}`)
-    .then(function (response) {
-      // res.json(response.data.response.docs);
-      sentiment.getSentiment(returnSentimentText(response.data.response.docs));
-    })
-    .catch(function (error) {
-      console.log(error);
-      console.log('ERROR!');
-      // res.json(error);
-    })
-}*/
