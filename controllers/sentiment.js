@@ -70,7 +70,7 @@ function returnSentimentPostObj(headlines) {
 	// If all headlines were concated to a single string (only happens if < ~90 articles):
 	else if (Array.isArray(headlines) === false) {
 		console.log('single sentiment doc only: ');
-		arr.push(new SentimentDoc(i, headlines));
+		arr.push(new SentimentDoc(0, headlines));
 		msSentiment(new SentimentPOST(arr));
 	}
 
@@ -84,7 +84,7 @@ function returnSentimentPostObj(headlines) {
 /*msSentiment(
 	{
 		"documents": [
-			new SentimentDoc(0, 'text to analyze.')
+			new SentimentDoc(0, 'I hate you. I love you. ')
 		]
 	}
 )*/
