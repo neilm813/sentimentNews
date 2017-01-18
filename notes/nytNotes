@@ -1,0 +1,27 @@
+`https://api.nytimes.com/svc/archive/v1/2017/1.json?api-key=${key}`
+
+NYT response properties (incompvare list)
+var articles = response.data.response.docs;
+
+articles[]
+.web_url // string
+.headline
+  .main // string
+  .print_headline // longer headline?
+pub_date // "2016-08-01T00:00:00Z"
+.keywords[]
+  .
+.lead_paragraph
+.news_desk //culture
+.section_name // Arts
+.snippet // often same as lead_paragraph
+.type_of_material // obituary
+.word_count
+.byline // object
+  .person[]
+    .organization // string
+    .role // "reported"
+    .firstname // "Jack"
+    .rank // int
+    .lastname // "WILLIAMS"
+  .original // "By JACK WILLIAMS"

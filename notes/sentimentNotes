@@ -1,0 +1,40 @@
+Microsoft Cognitive Services Text Analytics:
+
+for each document, limit text.length to 5095
+
+'I hate you.' = 0.1
+'I love you.' = 0.9
+'I love you.' I hate you.' = 0.29
+'I hate you.' I love you.' = 0.42
+
+Concatenated headline results (skewed from concatenation):
+{ Month: '12', AvgSentiment: '0.88' }
+{ Month: '11', AvgSentiment: '0.93' }
+{ Month: '10', AvgSentiment: '0.89' }
+{ Month: '9', AvgSentiment: '1.00' }
+{ Month: '8', AvgSentiment: '0.90' }
+{ Month: '7', AvgSentiment: '0.84' }
+{ Month: '6', AvgSentiment: '0.78' }
+{ Month: '5', AvgSentiment: '0.78' }
+{ Month: '4', AvgSentiment: '0.78' }
+{ Month: '3', AvgSentiment: '0.65' }
+{ Month: '2', AvgSentiment: '0.73' }
+{ Month: '1', AvgSentiment: '0.60' }
+
+
+POST format:
+  {
+    "documents": [
+      {
+        "language": "en",
+        "id": "1",
+        "text": ""
+      }
+      ...
+      {
+        "language": "en",
+        "id": "100",
+        "text": ""
+      }
+    ]
+  }
