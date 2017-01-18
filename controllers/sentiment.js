@@ -15,7 +15,7 @@ function SentimentPOST(docs) {
 	this.documents = docs;
 }
 
-function setSentimentMonth (month) {
+function setSentimentMonth(month) {
 	sentimentMonth = month;
 }
 
@@ -35,7 +35,7 @@ function returnMonthsAvgSentiment(sentiments) {
 }
 
 /* MS Text Analytics Sentiment API - limit text.length to 5095 */
-var msSentiment = (obj, req, res) => {
+function msSentiment(obj, req, res) {
 	var apikey = process.env.SENTIMENT;
 
 	var config = {
@@ -76,7 +76,7 @@ function returnSentimentPostObj(headlines) {
 
 	// if concated headlines arr.length > 1000
 	else {
-		/* This shouldn't happen. Full month of NYT articles ~5.5k. converts to ~56 concated headlines */
+		/* This shouldn't happen. large month of NYT articles ~5.5k. converts to ~56 concated headlines */
 		console.log('multiple POSTS to MS sentiment API needed');
 	}
 }
@@ -90,8 +90,9 @@ function returnSentimentPostObj(headlines) {
 )*/
 
 var getSentiment = (text) => {
+	var key = process.env.MASHAPE_KEY;
 	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
-		.header("X-Mashape-Key", "XWwI1lRtyEmsh1g9SDGRVs5BlBChp1LZoHCjsnjuhLqJTLgvws")
+		.header("X-Mashape-Key", key)
 		.header("Content-Type", "application/x-www-form-urlencoded")
 		.header("Accept", "application/json")
 		.send(`text=${text}`)
@@ -100,6 +101,7 @@ var getSentiment = (text) => {
 
 		});
 }
+
 
 module.exports = {
 	getSentiment,
