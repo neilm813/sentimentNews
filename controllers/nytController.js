@@ -25,7 +25,7 @@ function getArticles(year, month) {
       })
   })();
 }
-// getArticles('2016', '5');
+getArticles('2016', '1');
 
 /* Concat headlines to reduce # of documents sent in sentiment POST request because of their limit on us & their individual document size limit */
 function returnConcatedHeadlines(articles) {
